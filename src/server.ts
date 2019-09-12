@@ -8,7 +8,6 @@ async function startServer(): Promise<void> {
 
   const app = express();
 
-  app.get("/test1", (_req, res) => res.send("Hello World!"));
   app.get("/cities", async (_req, res) => {
     const result = await runQuery(pool, "select * from city;");
     res.send(result);
