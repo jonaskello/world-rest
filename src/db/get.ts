@@ -1,21 +1,22 @@
 import pg from "pg";
 import { runQuery } from "./run-query";
 
+const baseUrl = "http://localhost:4000";
+
 export async function getCities(pool: pg.Pool) {
-  const cities = await runQuery(pool, "select * from city;");
-  const citiesWithCountry = cities.map(buildCity);
-  return citiesWithCountry;
+  const cities = await runQuery(pool, "SELECT * FROM city;");
+  return cities.map(buildCity);
 }
 
 export async function getCity(pool: pg.Pool, id: number) {
-  const rows = await runQuery(pool, `select * from city where id = ${id};`);
+  const rows = await runQuery(pool, `SELECT * FROM city WHERE id = ${id};`);
   return buildCity(rows[0]);
 }
 
 export async function getCountry(pool: pg.Pool, code: string) {
   const rows = await runQuery(
     pool,
-    `select * from country where code = '${code}';`
+    `SELECT * FROM country WHERE code = '${code}';`
   );
   return buildCountry(pool, rows[0]);
 }
@@ -32,11 +33,11 @@ export async function getCountries(pool: pg.Pool) {
 async function buildCountry(pool: pg.Pool, c: any) {
   const cities = await runQuery(
     pool,
-    `select id from city where country_code = '${c.code}';`
+    `SELECT id FROM city WHERE country_code = '${c.code}';`
   );
   return {
     ...c,
-    cities: cities.map(city => `http://localhost:4000/cities/${city.id}`)
+    cities: cities.map(city => `${baseUrl}/cities/${city.id}`)
   };
 }
 
@@ -44,6 +45,6 @@ function buildCity(r: any) {
   return {
     ...r,
     country_code: undefined,
-    country: `http://localhost:4000/countries/${r.country_code}`
+    country: `${baseUrl}/countries/${r.country_code}`
   };
 }
