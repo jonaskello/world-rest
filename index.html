@@ -10,11 +10,15 @@
           c.name.toLowerCase().startsWith(startingWith.toLowerCase())
         );
         const resultDiv = document.getElementById("result");
-        const contriesDivs = contriesStartingWith
-          .map(c => `<div>${c.code}, ${c.name}</div>`)
-          .join("");
-        resultDiv.innerHTML = contriesDivs;
+        const contriesDivs = [];
+        for (const c of contriesStartingWith) {
+          contriesDivs.push(`<div>${c.code}, ${c.name}</div>`);
+        }
+        resultDiv.innerHTML = contriesDivs.join("");
       }
+      // async function getCities(countryCode) {
+      //   const response = await fetch("http://localhost:4000/cities");
+      // }
     </script>
   </head>
   <body>

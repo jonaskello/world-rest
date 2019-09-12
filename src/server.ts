@@ -1,5 +1,11 @@
 import express from "express";
-import { createConnectionPool, runQuery } from "./db";
+import {
+  createConnectionPool,
+  getCities,
+  getCity,
+  getCountries,
+  getCountry
+} from "./db";
 import cors from "cors";
 
 require("source-map-support").install();
@@ -10,26 +16,16 @@ async function startServer(): Promise<void> {
   const app = express();
   app.use(cors());
   app.get("/cities", async (_req, res) => {
-    const result = await runQuery(pool, "select * from city;");
-    res.send(result);
+    res.send(await getCities(pool));
   });
   app.get("/cities/:id", async (req, res) => {
-    const result = await runQuery(
-      pool,
-      `select * from city where id = ${req.params.id};`
-    );
-    res.send(result);
+    res.send(await getCity(pool, parseInt(req.params.id)));
   });
   app.get("/countries", async (_req, res) => {
-    const result = await runQuery(pool, "select * from country;");
-    res.send(result);
+    res.send(await getCountries(pool));
   });
   app.get("/countries/:code", async (req, res) => {
-    const result = await runQuery(
-      pool,
-      `select * from country where code = '${req.params.code}';`
-    );
-    res.send(result);
+    res.send(await getCountry(pool, req.params.code));
   });
 
   const port = 4000;
