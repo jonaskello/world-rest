@@ -9,8 +9,26 @@ async function startServer(): Promise<void> {
   const app = express();
 
   app.get("/test1", (_req, res) => res.send("Hello World!"));
-  app.get("/test2", async (_req, res) => {
+  app.get("/cities", async (_req, res) => {
     const result = await runQuery(pool, "select * from city;");
+    res.send(result);
+  });
+  app.get("/cities/:id", async (req, res) => {
+    const result = await runQuery(
+      pool,
+      `select * from city where id = ${req.params.id};`
+    );
+    res.send(result);
+  });
+  app.get("/countries", async (_req, res) => {
+    const result = await runQuery(pool, "select * from country;");
+    res.send(result);
+  });
+  app.get("/countries/:code", async (req, res) => {
+    const result = await runQuery(
+      pool,
+      `select * from country where code = '${req.params.code}';`
+    );
     res.send(result);
   });
 
