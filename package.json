@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
+    "start": "yarn start-db && yarn start-server",
+    "start-server": "tsc && tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
     "start-db": "docker start world-db || docker run --name world-db -d -p 5050:5432 ghusta/postgres-world-db:2.2-alpine",
     "stop-db": "docker stop world-db",
     "client": "serve"
