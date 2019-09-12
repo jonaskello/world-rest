@@ -7,17 +7,21 @@
     "build": "tsc",
     "start": "tsc && tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
     "start-db": "docker start world-db || docker run --name world-db -d -p 5050:5432 ghusta/postgres-world-db:2.2-alpine",
-    "stop-db": "docker stop world-db"
+    "stop-db": "docker stop world-db",
+    "test-client": "serve test-client"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
     "@types/express": "^4.17.1",
     "@types/node": "^12.7.5",
+    "@types/pg": "^7.11.1",
+    "serve": "^11.1.0",
     "source-map-support": "^0.5.13",
     "tsc-watch": "^3.0.1",
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@types/pg": "^7.11.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "pg": "^7.12.1"
   }

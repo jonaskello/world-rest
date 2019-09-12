@@ -1,5 +1,6 @@
 import express from "express";
 import { createConnectionPool, runQuery } from "./db";
+import cors from "cors";
 
 require("source-map-support").install();
 
@@ -7,7 +8,7 @@ async function startServer(): Promise<void> {
   const pool = await createConnectionPool();
 
   const app = express();
-
+  app.use(cors());
   app.get("/cities", async (_req, res) => {
     const result = await runQuery(pool, "select * from city;");
     res.send(result);
