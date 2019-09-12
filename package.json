@@ -1,0 +1,21 @@
+{
+  "name": "world-rest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
+    "start-db": "docker start world-db || docker run --name world-db -d -p 5050:5432 ghusta/postgres-world-db:2.2-alpine",
+    "stop-db": "docker stop world-db"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.5",
+    "tsc-watch": "^3.0.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

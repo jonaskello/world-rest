@@ -1,0 +1,27 @@
+# Dependency directory
+node_modules
+
+# Environment settings
+.env
+
+# Build cache
+.cache
+dist/
+tsconfig.tsbuildinfo
+
+# Build directory
+lib/
+
+# Webpack stats
+stats.json
+
+# Other
+.DS_Store
+thumbs.db
+*.log
+processed.txt
+temp-schema.graphql
+tmp/
+
+# VS
+.vs
