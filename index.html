@@ -3,6 +3,9 @@
     <script>
       async function getCountries() {
         const startingWith = document.getElementById("startingWith").value;
+        if (!startingWith) {
+          return;
+        }
         console.log("startingWith", startingWith);
         const response = await fetch("http://localhost:4000/countries");
         const allCountries = await response.json();
@@ -12,13 +15,19 @@
         const resultDiv = document.getElementById("result");
         const contriesDivs = [];
         for (const c of contriesStartingWith) {
-          contriesDivs.push(`<div>${c.code}, ${c.name}</div>`);
+          const cities = [];
+          for (const cityUrl of c.cities) {
+            const city = await (await fetch(cityUrl)).json();
+            cities.push(city);
+          }
+          contriesDivs.push(
+            `<div><b>${c.code}</b>, ${c.name}, (${cities
+              .map(c => c.name)
+              .join(", ")})</div>`
+          );
         }
         resultDiv.innerHTML = contriesDivs.join("");
       }
-      // async function getCities(countryCode) {
-      //   const response = await fetch("http://localhost:4000/cities");
-      // }
     </script>
   </head>
   <body>
