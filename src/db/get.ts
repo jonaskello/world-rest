@@ -3,17 +3,13 @@ import { runQuery } from "./run-query";
 
 export async function getCities(pool: pg.Pool) {
   const cities = await runQuery(pool, "select * from city;");
-  const citiesWithCountry = cities.map(r => ({
-    ...r,
-    country_code: undefined,
-    country: `http://localhost:4000/countries/${r.country_code}`
-  }));
+  const citiesWithCountry = cities.map(buildCity);
   return citiesWithCountry;
 }
 
 export async function getCity(pool: pg.Pool, id: number) {
   const rows = await runQuery(pool, `select * from city where id = ${id};`);
-  return rows;
+  return buildCity(rows[0]);
 }
 
 export async function getCountry(pool: pg.Pool, code: string) {
@@ -41,5 +37,13 @@ async function buildCountry(pool: pg.Pool, c: any) {
   return {
     ...c,
     cities: cities.map(city => `http://localhost:4000/cities/${city.id}`)
+  };
+}
+
+function buildCity(r: any) {
+  return {
+    ...r,
+    country_code: undefined,
+    country: `http://localhost:4000/countries/${r.country_code}`
   };
 }
