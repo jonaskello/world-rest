@@ -3,9 +3,7 @@
     <script>
       async function getCountries() {
         const startingWith = document.getElementById("startingWith").value;
-        if (!startingWith) {
-          return;
-        }
+        if (!startingWith) return;
         console.log("startingWith", startingWith);
         const response = await fetch("http://localhost:4000/countries");
         const allCountries = await response.json();
@@ -34,10 +32,9 @@
     <div>
       Search countries starting with:
       <input id="startingWith" type="text" />
-      <button onclick="getCountries()">
-        Fetch
-      </button>
+      <button onclick="getCountries()">Fetch</button>
     </div>
+    <br />
     <div id="result"></div>
   </body>
 </html>
