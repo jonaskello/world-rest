@@ -1,5 +1,5 @@
 import { runQuery } from "./db";
-import { Context } from "./create-context";
+import { Context } from "./context";
 
 const queryResolver = {
   countries: async (_parent, _args, ctx: Context) => {
