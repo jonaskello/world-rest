@@ -2,13 +2,12 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "lib": ["dom", "es2015", "es2017.object", "esnext.asynciterable"],
+    "lib": ["dom", "esnext"],
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "composite": true,
     "esModuleInterop": true,
     "newLine": "LF",
     "noEmitOnError": false,
@@ -18,7 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
-    "keyofStringsOnly": true,
+    "keyofStringsOnly": false,
     "downlevelIteration": true
   },
   "references": []

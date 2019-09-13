@@ -6,11 +6,12 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "run-s start-db start-server",
-    "start-server": "tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
-    "start-db": "docker run --name world-db -d -p 5050:5432 ghusta/postgres-world-db:2.2-alpine",
-    "stop-db": "docker stop world-db",
-    "client": "serve"
+    "start": "run-s db-start server-start",
+    "server-start": "tsc-watch --preserveWatchOutput --onSuccess \"node lib/server.js\" --onFailure \"echo >>> Compilation Failed\"",
+    "client-start": "serve",
+    "db-start": "docker start world-db",
+    "db-run": "docker run --name world-db -d -p 5050:5432 ghusta/postgres-world-db:2.2-alpine",
+    "db-stop": "docker stop world-db"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dataloader": "^1.4.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.4",
