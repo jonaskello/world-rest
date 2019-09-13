@@ -13,7 +13,6 @@
     "newLine": "LF",
     "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
