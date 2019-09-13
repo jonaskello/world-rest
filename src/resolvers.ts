@@ -9,13 +9,8 @@ const queryResolver = {
     );
     return countries;
   },
-  country: async (_parent, args, ctx: Context) => {
-    const rows = await runQuery(
-      ctx.pool,
-      `select code, name, continent from country where code = '${args.code}'`
-    );
-    return rows[0];
-  }
+  country: async (_parent, args, ctx: Context) =>
+    ctx.loaders.countryByCode.load(args.code)
 };
 
 const countryResolver = {
@@ -23,7 +18,6 @@ const countryResolver = {
     return null;
   },
   name: async (parent, _args, ctx: Context) => {
-    console.log("parent", parent);
     const rows = await runQuery(
       ctx.pool,
       `SELECT * FROM country WHERE code = '${parent.code}';`
