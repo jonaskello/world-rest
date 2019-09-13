@@ -14,24 +14,14 @@ const queryResolver = {
 };
 
 const countryResolver = {
-  code: async (_parent, _args, _ctx) => {
-    return null;
-  },
+  code: async (parent, _args, _ctx) => parent.code,
   name: async (parent, _args, ctx: Context) => {
-    const rows = await runQuery(
-      ctx.pool,
-      `SELECT * FROM country WHERE code = '${parent.code}';`
-    );
-    return rows[0].name;
-    // return parent.name;
+    const country = await ctx.loaders.countryByCode.load(parent.code);
+    return country.name;
   },
   continent: async (parent, _args, ctx: Context) => {
-    const rows = await runQuery(
-      ctx.pool,
-      `SELECT * FROM country WHERE code = '${parent.code}';`
-    );
-    return rows[0].continent;
-    // return parent.continent;
+    const country = await ctx.loaders.countryByCode.load(parent.code);
+    return country.continent;
   },
   cities: async (parent, _args, ctx: Context) => {
     const rows = await runQuery(
