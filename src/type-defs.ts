@@ -20,5 +20,6 @@ export const typeDefs = gql`
   type City {
     id: Int!
     name: String!
+    country: Country!
   }
 `;

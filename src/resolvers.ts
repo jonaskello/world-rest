@@ -22,26 +22,27 @@ const countryResolver = {
   code: async (_parent, _args, _ctx) => {
     return null;
   },
-  name: async (parent, _args, _ctx: Context) => {
-    // const rows = await runQuery(
-    //   ctx.pool,
-    //   `SELECT * FROM country WHERE code = '${parent.code}';`
-    // );
-    // return rows[0].name;
-    return parent.name;
+  name: async (parent, _args, ctx: Context) => {
+    console.log("parent", parent);
+    const rows = await runQuery(
+      ctx.pool,
+      `SELECT * FROM country WHERE code = '${parent.code}';`
+    );
+    return rows[0].name;
+    // return parent.name;
   },
-  continent: async (parent, _args, _ctx: Context) => {
-    // const rows = await runQuery(
-    //   ctx.pool,
-    //   `SELECT * FROM country WHERE code = '${parent.code}';`
-    // );
-    // return rows[0].continent;
-    return parent.continent;
+  continent: async (parent, _args, ctx: Context) => {
+    const rows = await runQuery(
+      ctx.pool,
+      `SELECT * FROM country WHERE code = '${parent.code}';`
+    );
+    return rows[0].continent;
+    // return parent.continent;
   },
   cities: async (parent, _args, ctx: Context) => {
     const rows = await runQuery(
       ctx.pool,
-      `SELECT id, name FROM city WHERE country_code = '${parent.code}';`
+      `SELECT id, name, country_code FROM city WHERE country_code = '${parent.code}';`
     );
     return rows;
   }
@@ -53,6 +54,9 @@ const cityResolver = {
   },
   name: async (parent, _args, _ctx) => {
     return parent.name;
+  },
+  country: async (parent, _args, _ctx) => {
+    return { code: parent.country_code };
   }
 };
 
