@@ -7,12 +7,14 @@ export const typeDefs = gql`
 
   type Query {
     countries: [Country!]!
+    country(code: String!): Country
   }
 
   type Country {
     code: String!
     name: String!
     continent: String!
+    cities: [City!]!
   }
 
   type City {
