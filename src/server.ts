@@ -3,6 +3,8 @@ import cors from "cors";
 import * as db from "./db";
 import graphqlHTTP, { OptionsData } from "express-graphql";
 import { GraphQLError } from "graphql";
+import { schema } from "./schema";
+
 require("source-map-support").install();
 
 async function startServer(): Promise<void> {

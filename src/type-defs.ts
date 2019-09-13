@@ -14,4 +14,9 @@ export const typeDefs = gql`
     name: String!
     continent: String!
   }
+
+  type City {
+    id: Int!
+    name: String!
+  }
 `;
