@@ -4,6 +4,7 @@ import * as db from "./db";
 import graphqlHTTP, { OptionsData } from "express-graphql";
 import { GraphQLError } from "graphql";
 import { schema } from "./schema";
+import { createContext } from "./create-context";
 
 require("source-map-support").install();
 
