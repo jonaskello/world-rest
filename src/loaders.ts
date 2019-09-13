@@ -32,5 +32,5 @@ export const citiesForCountryCodes = pool => async codes => {
     }
     cities.push(r);
   }
-  return codes.map(code => citiesByCountryCode[code]);
+  return codes.map(code => citiesByCountryCode[code] || []);
 };
