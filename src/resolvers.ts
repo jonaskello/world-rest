@@ -28,15 +28,9 @@ const countryResolver = {
 };
 
 const cityResolver = {
-  id: async (parent, _args, _ctx) => {
-    return parent.id;
-  },
-  name: async (parent, _args, _ctx) => {
-    return parent.name;
-  },
-  country: async (parent, _args, _ctx) => {
-    return { code: parent.country_code };
-  }
+  id: async (parent, _args, _ctx) => parent.id,
+  name: async (parent, _args, _ctx) => parent.name,
+  country: async (parent, _args, _ctx) => ({ code: parent.country_code })
 };
 
 export const resolvers = {
